@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import '@fontsource/roboto/500.css';
 import { border } from '@mui/system';
+import { Hidden } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -95,39 +96,36 @@ const StyledMenu = styled((props: MenuProps) => (
 
 
 const useStyles = makeStyles({
-    buttonevent: {
-        color: "#F05537",
-        height: "48px",
-        padding: '0 30px',
+    container: {
+        backgroundColor: '#014201',
+        marginBottom: "2em",
+        color: "#FFF"
     },
-    topo: {
-        width: "1899px",
-        height: "81px",
-        left: "4px",
-        top: "2px",
-        right: "1903px",
-        bottom: "71px",
-        backgroundColor: 'green',
-        margin: 0,
-        padding: 0,
-        boxSizing: 'border-box',
-        marginTop: 10,
-        marginLeft: 90,
-        marginRight: 10,
+    gridLogo: {
+        textAlign: "center",
+        padding: "0.2em"
     },
     img: {
-        width: "300px",
-        height: "290px",
+        height: "70px"
     },
-    font: {
-        fontFamily: "Courier New"
+    gridSearch: {
+        textAlign: "center",
     },
-    toporight: {
-        textAlign: "right"
-    }
+    search: {
+        marginTop: '1.1em'
+    },
+    gridMenu: {
+        textAlign: "center"
+    },
+    menu: {
+        marginTop: '1.4em !important',
+        color: "#FFF !important"
+    },
+
 });
 
 export default function Topo(): JSX.Element {
+
     const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -140,12 +138,14 @@ export default function Topo(): JSX.Element {
     };
 
     return (
-        <Grid className={classes.topo} container spacing={1}>
-            <Grid item xs={3}>
-                <Button className={classes.buttonevent} color="secondary" variant="text">eventbrite</Button>
+        <Grid className={classes.container} container spacing={1}>
+
+            <Grid item xs={3} sm={2} md={4} className={classes.gridLogo}>
+                <img src='./logo192.png' className={classes.img}></img>
             </Grid>
-            <Grid item xs={5}>
-                <Search>
+
+            <Grid item xs={9} sm={10} md={4} className={classes.gridSearch}>
+                <Search className={classes.search}>
                     <SearchIconWrapper>
                         <SearchIcon />
                     </SearchIconWrapper>
@@ -155,8 +155,12 @@ export default function Topo(): JSX.Element {
                     />
                 </Search>
             </Grid>
-            <Grid className={classes.toporight} item xs={4}>
+
+
+            <Grid className={classes.gridMenu} item xs={12} sm={12} md={4} >
+
                 <Button
+                    className={classes.menu}
                     id="demo-customized-button"
                     aria-controls={open ? 'demo-customized-menu' : undefined}
                     aria-haspopup="true"
@@ -168,6 +172,7 @@ export default function Topo(): JSX.Element {
                 >
                     Organize
                 </Button>
+
                 <StyledMenu
                     id="demo-customized-menu"
                     MenuListProps={{
@@ -192,6 +197,7 @@ export default function Topo(): JSX.Element {
                 </StyledMenu>
 
                 <Button
+                    className={classes.menu}
                     id="demo-customized-button"
                     aria-controls={open ? 'demo-customized-menu' : undefined}
                     aria-haspopup="true"
@@ -203,6 +209,7 @@ export default function Topo(): JSX.Element {
                 >
                     Help
                 </Button>
+
                 <StyledMenu
                     id="demo-customized-menu"
                     MenuListProps={{
@@ -226,8 +233,10 @@ export default function Topo(): JSX.Element {
                     </MenuItem>
                 </StyledMenu>
 
-                <Button variant="text">Sign In</Button>
+                <Button variant="text" className={classes.menu}>Sign In</Button>
+
             </Grid>
+
         </Grid>
     )
 

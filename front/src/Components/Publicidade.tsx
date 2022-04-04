@@ -3,11 +3,10 @@ import { makeStyles } from '@mui/styles';
 
 
 const useStyles = makeStyles({
-
-    
-    font: {
-        fontFamily: "Courier New"
-    },
+    container: {
+        backgroundColor: "blue",   
+        marginBottom: "1em !important"      
+    }
 });
 
 export default function Publicidade(): JSX.Element {
@@ -16,18 +15,8 @@ export default function Publicidade(): JSX.Element {
 
 
     return (
-        <div>
-            <Grid  container spacing={1}>
-                <Grid item xs={12}>
-                    <p>
-                        PUBLICIDADE AQUI
-                    </p>
-
-                </Grid>
-
-                
-            </Grid>
-
-        </div>
+        <Grid item xs={12} sm={12} md={12} className={classes.container}>
+            publicidade
+        </Grid>
     )
 }
