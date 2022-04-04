@@ -1,4 +1,4 @@
-import Cardes from "../Components/Cardes";
+import Cardes from "./Cards";
 import { Grid } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import { styled, alpha } from '@mui/material/styles';
@@ -58,31 +58,12 @@ const useStyles = makeStyles({
         height: "48px",
         padding: '0 30px',
     },
-    topo: {
-        width: "1899px",
-        height: "81px",
-        left: "4px",
-        top: "2px",
-        right: "1903px",
-        bottom: "71px",
-        backgroundColor: 'green'
-    },
     img: {
         width: "300px",
         height: "290px",
     },
     font: {
         fontFamily: "Courier New"
-    },
-    root: {
-        margin: 0,
-        padding: 0,
-        boxSizing: 'border-box',
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10,
-       
-
     },
     toporight: {
         textAlign: "right"
@@ -93,7 +74,7 @@ const useStyles = makeStyles({
 export default function Carroussel() : JSX.Element{
     const classes = useStyles();
     return (
-        <>
+        <div >
          <Grid container spacing={1}>
                 <Grid item xs={4}>
                     <p>
@@ -132,6 +113,6 @@ export default function Carroussel() : JSX.Element{
                     {/* <Button className={classes.font} variant="text">Popular in Lisboa</Button> */}
                 </Grid>
             </Grid>
-        </>
+        </div>
     )
 }

@@ -107,7 +107,13 @@ const useStyles = makeStyles({
         top: "2px",
         right: "1903px",
         bottom: "71px",
-        backgroundColor: 'green'
+        backgroundColor: 'green',
+        margin: 0,
+        padding: 0,
+        boxSizing: 'border-box',
+        marginTop: 10,
+        marginLeft: 90,
+        marginRight: 10,
     },
     img: {
         width: "300px",
@@ -115,16 +121,6 @@ const useStyles = makeStyles({
     },
     font: {
         fontFamily: "Courier New"
-    },
-    root: {
-        margin: 0,
-        padding: 0,
-        boxSizing: 'border-box',
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10,
-       
-
     },
     toporight: {
         textAlign: "right"

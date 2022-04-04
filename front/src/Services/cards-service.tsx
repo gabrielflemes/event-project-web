@@ -1,13 +1,12 @@
 import ICards from "../Interfaces/card.interface";
 import api from "./api";
 
-export default function GetCards(): any{
+export default function GetCards() {
 
-    api.get("/cards").then((res)=>{
-        debugger
-        console.log(res)
+    return api.get("/cards").then((res) => {
+        if (res) {
+            return res.data;
+        }
+
     })
-
-  
-
 }

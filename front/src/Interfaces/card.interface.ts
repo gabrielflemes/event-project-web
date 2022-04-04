@@ -1,5 +1,7 @@
 export default interface ICards {
-  titulo: string,
+  id: string,
+  title: string,
+  img: string,
   data: string,
   qtdPessoa: number
 }

@@ -1,12 +1,12 @@
-import Cardes from "../Components/Cardes";
+import Cards from "../Components/Cards";
 import Carroussel from "../Components/Carrossel";
 
-export default function Home() : JSX.Element{
+export default function Home(): JSX.Element {
 
     return (
         <>
-        <Carroussel/>
-        <Cardes></Cardes>
+            <Carroussel />
+            <Cards></Cards>
         </>
     )
 }
