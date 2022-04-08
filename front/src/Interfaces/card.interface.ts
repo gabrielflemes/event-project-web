@@ -6,5 +6,5 @@ export default interface ICards {
   date: string,
   amount: string,
   confirmed: string,
-  img: string
+  img: string,
 }

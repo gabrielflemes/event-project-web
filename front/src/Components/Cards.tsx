@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Grid } from "@mui/material";
+import { ButtonBaseActions, Grid } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -13,7 +13,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import { makeStyles } from '@mui/styles';
 import GetCards from '../Services/cards-service';
 import ICards from '../Interfaces/card.interface';
-
+import { CardActionArea } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 const useStyles = makeStyles({
@@ -32,45 +33,51 @@ const useStyles = makeStyles({
 export default function Cards() {
 
     const classes = useStyles();
-
+    let navigate = useNavigate();
 
     const [cards, setCards] = useState<ICards[]>();
 
 
+    const irparapage = ()=>{
+        //USAR O PUSH DO ROUTERDOM 
+        navigate("/eventdetail")
+    }
     const renderCards = () => {
 
         let ret = cards?.map((card) => {
             return (
                 <Grid item xs={12} sm={6} md={3}>
                     <Card sx={{ maxWidth: 345 }}>
-                        <CardHeader
-                            title={card.title}
-                            subheader={card.date}
-                        />
-                        <CardMedia
-                            component="img"
-                            height="150"
-                            image={card.img}
-                            alt={card.title}
-                        />
-                        <CardContent>
-                            <Typography variant="body2" color="text.secondary">
-                                <p className={classes.bold}>{card.address}</p>
-                                <p className={classes.bold}>{card.company}</p>
-                                <p>Price: <span className={classes.price}>{card.amount}</span></p>
-                                <p><span>Confirmed: </span>{card.confirmed}</p>
-                            </Typography>
-                        </CardContent>
-                        <CardActions disableSpacing>
-                            <IconButton aria-label="add to favorites">
-                                <FavoriteIcon />
-                            </IconButton>
-                            <IconButton aria-label="share">
-                                <ShareIcon />
-                            </IconButton>
+                        <CardActionArea>
+                            <CardHeader
+                                onClick={irparapage}
+                                title={card.title}
+                                subheader={card.date}
+                            />
+                            <CardMedia
+                                component="img"
+                                height="150"
+                                image={card.img}
+                                alt={card.title}
+                            />
+                            <CardContent>
+                                <Typography variant="body2" color="text.secondary">
+                                    <p className={classes.bold}>{card.address}</p>
+                                    <p className={classes.bold}>{card.company}</p>
+                                    <p>Price: <span className={classes.price}>{card.amount}</span></p>
+                                    <p><span>Confirmed: </span>{card.confirmed}</p>
+                                </Typography>
+                            </CardContent>
+                            <CardActions disableSpacing>
+                                <IconButton aria-label="add to favorites">
+                                    <FavoriteIcon />
+                                </IconButton>
+                                <IconButton aria-label="share">
+                                    <ShareIcon />
+                                </IconButton>
 
-                        </CardActions>
-
+                            </CardActions>
+                        </CardActionArea>
                     </Card>
                 </Grid>
             )

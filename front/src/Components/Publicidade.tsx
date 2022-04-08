@@ -7,7 +7,8 @@ const useStyles = makeStyles({
         backgroundColor: "#DCDCDC",
         marginBottom: "1em !important",
         display: "flex"
-    }
+    },
+    
 });
 
 export default function Publicidade(): JSX.Element {
@@ -17,10 +18,10 @@ export default function Publicidade(): JSX.Element {
 
     return (
         <Grid item xs={12} sm={12} md={12} className={classes.container}>
-            <Grid item xs={4}>
+            {/* <Grid item xs={4}>
                 <figure>
                     <a href="https://www.netflix.com/pt/" target="_blank">
-                        <img src="download.jpg" />
+                        <img height="120" src="download.jpg" />
                     </a>
                 </figure>
             </Grid>
@@ -28,15 +29,15 @@ export default function Publicidade(): JSX.Element {
             <Grid item xs={4}>
                 <figure>
                     <a href="https://www.ubereats.com/pt" target="_blank">
-                        <img src="download (1).png" />
+                        <img height="120" src="download (1).png" />
                     </a> 
                 </figure>
-            </Grid>
+            </Grid> */}
 
-            <Grid item xs={4}>
+            <Grid item xs={12}>
                 <figure>
                     <a href="https://www.nos.pt/" target="_blank">
-                        <img src="download (2).png" />
+                        <img height="100" width="1000" src="download (2)_Easy-Resize.com (2).jpg" />
                     </a>
                 </figure>
             </Grid>
