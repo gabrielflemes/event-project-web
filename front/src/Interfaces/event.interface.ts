@@ -1,4 +1,4 @@
-export default interface ICards {
+export default interface IEvent {
   id: string,
   title: string,
   company: string,
@@ -7,4 +7,5 @@ export default interface ICards {
   amount: string,
   confirmed: string,
   img: string,
+  description: string
 }

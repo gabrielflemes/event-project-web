@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
@@ -11,7 +11,9 @@ import Divider from '@mui/material/Divider';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import '@fontsource/roboto/500.css';
 import { border } from '@mui/system';
-import { Hidden } from '@mui/material';
+import { Hidden, IconButton } from '@mui/material';
+import IEvent from '../Interfaces/event.interface';
+import { GetEventByFilter } from '../Services/events-service';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -128,14 +130,33 @@ export default function Topo(): JSX.Element {
 
     const classes = useStyles();
 
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+
+    //variable that will keep my filter value
+    const [inputSearch, setInputSearch] = useState<string>("");
+
+
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
+
+
+
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const searchEvent = (e: any) => {
+
+        //find events by filter
+        GetEventByFilter(inputSearch).then((res: IEvent[] | void) => {
+            if (res) {
+                //use redux here
+            }
+        })
+
+    }
 
     return (
         <Grid className={classes.container} container spacing={1}>
@@ -145,11 +166,21 @@ export default function Topo(): JSX.Element {
             </Grid>
 
             <Grid item xs={9} sm={10} md={4} className={classes.gridSearch}>
-                <Search className={classes.search}>
-                    <SearchIconWrapper>
+                <Search className={classes.search} onKeyUp={(e: any) => {
+                    //when we can do sth when the ENTER is pressed, we can use keyCode equals 13
+                    //13 is enter from ascii table
+                    if (e.keyCode == 13) {
+                        searchEvent(e);
+                    }
+                }}>
+                    <IconButton onClick={searchEvent}>
                         <SearchIcon />
-                    </SearchIconWrapper>
+                    </IconButton >
                     <StyledInputBase
+                        value={inputSearch}
+                        onChange={(e: any) => {
+                            setInputSearch(e.target.value);
+                        }}
                         placeholder="Search events"
                         inputProps={{ 'aria-label': 'search' }}
                     />

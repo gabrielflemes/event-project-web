@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { ButtonBaseActions, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import { makeStyles } from '@mui/styles';
-import GetCards from '../Services/cards-service';
-import ICards from '../Interfaces/card.interface';
+import { GetEvents } from '../Services/events-service';
+import IEvent from '../Interfaces/event.interface';
 import { CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -35,37 +35,46 @@ export default function Cards() {
     const classes = useStyles();
     let navigate = useNavigate();
 
-    const [cards, setCards] = useState<ICards[]>();
+    //TODO sent this variable to into contextAPI
+    //see documentation, videos how contextAPI works
+    //
+    //const [events, setEvents] = useState<IEvent[]>();
 
 
-    const irparapage = ()=>{
-        //USAR O PUSH DO ROUTERDOM 
-        navigate("/eventdetail")
+    const irparapage = (id: string) => {
+
+        //go to event selected
+        navigate(`/event/${id}`)
+
     }
+
+    //render cards
     const renderCards = () => {
 
-        let ret = cards?.map((card) => {
+        let ret = contextEvent.events?.map((event) => {
             return (
                 <Grid item xs={12} sm={6} md={3}>
                     <Card sx={{ maxWidth: 345 }}>
                         <CardActionArea>
                             <CardHeader
-                                onClick={irparapage}
-                                title={card.title}
-                                subheader={card.date}
+                                onClick={() => {
+                                    irparapage(event.id);
+                                }}
+                                title={event.title}
+                                subheader={event.date}
                             />
                             <CardMedia
                                 component="img"
                                 height="150"
-                                image={card.img}
-                                alt={card.title}
+                                image={event.img}
+                                alt={event.title}
                             />
                             <CardContent>
                                 <Typography variant="body2" color="text.secondary">
-                                    <p className={classes.bold}>{card.address}</p>
-                                    <p className={classes.bold}>{card.company}</p>
-                                    <p>Price: <span className={classes.price}>{card.amount}</span></p>
-                                    <p><span>Confirmed: </span>{card.confirmed}</p>
+                                    <p className={classes.bold}>{event.address}</p>
+                                    <p className={classes.bold}>{event.company}</p>
+                                    <p>Price: <span className={classes.price}>{event.amount}</span></p>
+                                    <p><span>Confirmed: </span>{event.confirmed}</p>
                                 </Typography>
                             </CardContent>
                             <CardActions disableSpacing>
@@ -86,9 +95,13 @@ export default function Cards() {
         return ret;
     }
 
+    //get all events
     useEffect(() => {
-        GetCards().then((res) => {
-            setCards(res)
+        GetEvents().then((res: IEvent[] | void) => {
+            if (res) {
+                contextEvents.setEvents(res)
+            }
+
         });
     }, []);
 
