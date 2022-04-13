@@ -114,7 +114,7 @@ app.get("/events", (req, res) =>{
 
 app.get("/events/:filter", (req, res) =>{
     console.log( req.params.filter)
-    let objFound = eventsFake.filter(x => x.title == req.params.filter);
+    let objFound = eventsFake.filter(x => x.title.toLowerCase().includes(req.params.filter.toLowerCase()));
     console.log(objFound)
 
     res.send(objFound);

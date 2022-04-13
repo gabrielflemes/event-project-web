@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
@@ -14,6 +14,7 @@ import { border } from '@mui/system';
 import { Hidden, IconButton } from '@mui/material';
 import IEvent from '../Interfaces/event.interface';
 import { GetEventByFilter } from '../Services/events-service';
+import { EventsContext } from '../Contexts/Events';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -130,6 +131,8 @@ export default function Topo(): JSX.Element {
 
     const classes = useStyles();
 
+    const [events, setEvents] = useContext(EventsContext);
+
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
@@ -152,7 +155,7 @@ export default function Topo(): JSX.Element {
         //find events by filter
         GetEventByFilter(inputSearch).then((res: IEvent[] | void) => {
             if (res) {
-                //use redux here
+                setEvents(res);
             }
         })
 
